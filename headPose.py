@@ -3,11 +3,13 @@ import numpy as np
 import dlib
 import time
 import math
+import tensorflow as tf
 from math import hypot
 from pynput.mouse import Button, Controller
 print("Loading")
 cap = cv2.VideoCapture(0)
 time.sleep(2.0);
+
 
 calibrated = False 
 
@@ -154,17 +156,17 @@ while(True):
     # We use this to draw a line sticking out of the nose
 
 
-    # if not calibrated: 
-    #     print("Calibrating. Get Ready...")
-    #     time.sleep(2.0)
+    if not calibrated: 
+         print("Calibrating. Get Ready...")
+         time.sleep(2.0)
     #     print("Top Left")
     #     time.sleep(3.0)
-    #     left = translation_vector[0,0]
-    #     top = translation_vector[1,0]
+         left = translation_vector[0,0]
+         top = translation_vector[1,0]
     #     print("Bottom Right")
-    #     time.sleep(3.0)
-    #     right = translation_vector[0,0]
-    #     bottom = translation_vector[1,0]
+         time.sleep(3.0)
+         right = translation_vector[0,0]
+         bottom = translation_vector[1,0]
 
 
     #     print(left)
@@ -222,14 +224,14 @@ while(True):
     
     
 
-    #(nose_end_point2D, jacobian) = cv2.projectPoints(np.array([(0.0, 0.0, 1000.0)]), rotation_vector, translation_vector, camera_matrix, dist_coeffs)
+    (nose_end_point2D, jacobian) = cv2.projectPoints(np.array([(0.0, 0.0, 1000.0)]), rotation_vector, translation_vector, camera_matrix, dist_coeffs)
 
     #for p in image_points:
         #cv2.circle(im, (int(p[0]), int(p[1])), 3, (0,0,255), -1)
 
 
-    #p1 = ( int(image_points[0][0]), int(image_points[0][1]))
-    #p2 = ( int(nose_end_point2D[0][0][0]), int(nose_end_point2D[0][0][1]))
+    p1 = ( int(image_points[0][0]), int(image_points[0][1]))
+    p2 = ( int(nose_end_point2D[0][0][0]), int(nose_end_point2D[0][0][1]))
 
     #cv2.line(im, p1, p2, (255,0,0), 2)
 
